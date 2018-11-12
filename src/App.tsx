@@ -5,18 +5,11 @@ import './css/responsive.css';
 import './css/style.css';
 
 import { Grid, Row } from 'react-bootstrap';
-
-function shuffle<T>(arr: T[]): T[]{
-  for (let i = arr.length - 1; i >= 0; i--) {
-  
-      const randomIndex = Math.floor(Math.random()*(i+1)); 
-      const itemAtIndex = arr[randomIndex]; 
-      
-      arr[randomIndex] = arr[i]; 
-      arr[i] = itemAtIndex;
-  }
-  return arr;
-};
+import MatchTable from "./components/MatchTable";
+import { ISanta, IMatch } from './types';
+import SantaTable from "./components/SantaTable";
+import { shuffle } from './utils';
+import SantaCreator from "./components/SantaCreator";
 
 const mockSantas = [
   {
@@ -45,18 +38,11 @@ const mockSantas = [
   }
 ];
 
-interface ISanta {
-  name: string;
-  email: string;
-}
-
 interface IState {
-  santas: ISanta[];
-  newSantaName: string;
-  newSantaEmail: string;
-  numberOfMatches: number;
-  matches: IMatch[];
-  secretMode: boolean;
+    santas: ISanta[];
+    numberOfMatches: number;
+    matches: IMatch[];
+    secretMode: boolean;
 }
 
 class App extends React.Component<{}, IState>{
@@ -68,49 +54,25 @@ class App extends React.Component<{}, IState>{
 
     this.state = {
       santas: mockSantas,
-      newSantaName: "",
-      newSantaEmail: "",
       numberOfMatches: 2,
       matches: [],
       secretMode: false
     }
   }
 
-  private handleNewSantaNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // When the text changes update the app state with the new text
-    this.setState({
-      newSantaName: event.target.value
-    })
-  }
-
-  private handleNewSantaEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // When the text changes update the app state with the new text
-    this.setState({
-      newSantaEmail: event.target.value
-    })
-  }
-
-  private handleNewSantaClick = () => {
-    const newSanta = {
-      name: this.state.newSantaName,
-      email: this.state.newSantaEmail
-    };
-   
+  private handleAddSanta = (newSanta: ISanta) => {
     this.setState({
       // Set the current list of santas to be the existing list with the the new santa added to the end
-      santas: [...this.state.santas, newSanta],  
-      // Reset santa name & email
-      newSantaName: "",
-      newSantaEmail: ""
+      santas: [...this.state.santas, newSanta]
     });
-  }
+  };
 
   // When the slider of number of matches changes 
   private handleNumberOfMatchesChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       numberOfMatches: parseInt(event.target.value, 10)
     });
-  }
+  };
 
   private handleGenerateMatches = (event: React.MouseEvent<HTMLInputElement> | React.FormEvent<HTMLFormElement>) => {
     const { numberOfMatches, santas } = this.state;
@@ -178,13 +140,13 @@ class App extends React.Component<{}, IState>{
   
   private getMatchClickedEventHandler = (match: IMatch) => () => {
     alert(match.santa.name);
-  }
+  };
 
   private getDeleteSantaHandler = (deleteSanta: ISanta) => () => {
     this.setState({
       santas: this.state.santas.filter(santa => santa.name !== deleteSanta.name)
     })
-  }
+  };
 
   public render() {
     const haveGenerated = this.state.matches.length > 0;
@@ -212,27 +174,10 @@ class App extends React.Component<{}, IState>{
 
       <Grid>
         <form onSubmit={this.handleGenerateMatches}>
-          <h2>Add Santa</h2>
-          <Row>
-            <label>Name:</label>
-            <input 
-              value={this.state.newSantaName}
-              onChange={this.handleNewSantaNameChange}
-            />
-          </Row>
-          <Row>
-            <label>Email:</label>
-            <input 
-              value={this.state.newSantaEmail}
-              onChange={this.handleNewSantaEmailChange}
-            />
-          </Row>
-          <Row>
-            <button onClick={this.handleNewSantaClick}>Add Santa 🎅🏼</button>
-          </Row>
+          <SantaCreator addSanta={this.handleAddSanta} />
           <Row>
             <label>Number of Matches:</label>
-            <input 
+            <input
               type="range"
               min={1}
               max={this.state.santas.length - 1}
@@ -257,8 +202,7 @@ class App extends React.Component<{}, IState>{
 
         { haveGenerated &&
           <Row>
-            <MatchTable 
-              getMatchClickedEventHandler={this.getMatchClickedEventHandler}
+            <MatchTable getMatchClickedEventHandler={this.getMatchClickedEventHandler}
               matches={this.state.matches}   
               secretMode={this.state.secretMode}
             />
@@ -268,135 +212,6 @@ class App extends React.Component<{}, IState>{
       </div>
     );
   }
-}
-
-interface IMatchListProps {
-  matches: IMatch[];
-  getMatchClickedEventHandler: (match: IMatch) => React.MouseEventHandler<HTMLButtonElement>
-  secretMode: boolean;
-}  
-
-interface IMatch {
-  santa: ISanta;
-  matchedWith: ISanta[];
-}
-
-interface IMatchListItemProps {
-  match: IMatch;
-  onMatchClicked: React.MouseEventHandler<HTMLButtonElement>;
-  secretMode: boolean;
-}
-
-const MatchTable = (props: IMatchListProps)=> {
-  return (
-    <div>
-      <h2>Matches</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Matched With</th>
-            <th>Actions</th>
-          </tr>
-
-        </thead>
-        <tbody>
-          {props.matches.map(match => 
-            <MatchTableRow 
-              match={match} 
-              key={match.santa.name}
-              onMatchClicked={props.getMatchClickedEventHandler(match)}
-              secretMode={props.secretMode}
-            />)}
-          </tbody>
-      </table>
-    </div>
-  );
-}
-
-const MatchTableRow = (props: IMatchListItemProps) => {
-    return (
-      <tr>
-        <td>{props.match.santa.name}</td>
-        {!props.secretMode && 
-          <td>
-            { props.match.matchedWith.map(santa => <span key={santa.name}><NameIndicator name={santa.name}/>{santa.name}</span>)}
-          </td>
-        }
-          
-        <td><button onClick={props.onMatchClicked}>Send Email</button></td>
-      </tr>
-    );
-}
-
-interface ISantaListProps {
-  santas: ISanta[];
-  getDeleteSantaHandler: (santa: ISanta) => React.MouseEventHandler<HTMLButtonElement>;
-}
-
-interface ISantaListItemProps {
-  santa: ISanta;
-  onDelete: React.MouseEventHandler<HTMLButtonElement>
-}
-
-const SantaTable = (props: ISantaListProps) => {
-  const { santas } = props;
-
-  const renderEmpty = () => (
-    <p>You haven't added any santas yet!</p>
-  );
-
-  return (
-    <div>
-    <h1>Santas</h1>
-      { santas.length === 0 
-        ? renderEmpty() 
-        : <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {santas.map(santa => 
-                <SantaTableRow 
-                  santa={santa} 
-                  key={santa.name}
-                  onDelete={props.getDeleteSantaHandler(santa)}
-                />)}
-            </tbody>
-          </table>
-      }
-    </div>
-  );
-}
-
-function hashCode(str: string) { // java String#hashCode
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 3) - hash);
-  }
-  return hash;
-} 
-
-const getColourFromName = (name: string) => {
-  return `hsla(${hashCode(name) * hashCode(name) % 360}, 100%, 50%, 1)`;
-}
-
-const SantaTableRow = (props: ISantaListItemProps) => {
-  return (
-    <tr>
-      <td><NameIndicator name={props.santa.name}/>{props.santa.name}</td>
-      <td>{props.santa.email}</td>
-      <td><button onClick={props.onDelete}>x</button></td>
-    </tr>
-  );
-}
-
-const NameIndicator = (props: { name: string }) => {
-  return <span style={{backgroundColor: getColourFromName(props.name)}}>{hashCode(props.name) % 360}</span>
 }
 
 export default App;
