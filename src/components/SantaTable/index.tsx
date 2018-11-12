@@ -1,7 +1,8 @@
-import {ISanta} from "../../types";
 import * as React from "react";
+import {ISanta} from "../../types";
 
 import SantaTableRow from '../SantaTableRow';
+import {Table} from "react-bootstrap";
 
 interface ISantaListProps {
     santas: ISanta[];
@@ -20,7 +21,7 @@ const SantaTable = (props: ISantaListProps) => {
             <h1>Santas</h1>
             { santas.length === 0
                 ? renderEmpty()
-                : <table>
+                : <Table striped bordered condensed>
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -36,7 +37,7 @@ const SantaTable = (props: ISantaListProps) => {
                             onDelete={props.getDeleteSantaHandler(santa)}
                         />)}
                     </tbody>
-                </table>
+                </Table>
             }
         </div>
     );

@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import { IMatch } from '../../types';
 import MatchTableRow from '../MatchTableRow';
+import {Table} from "react-bootstrap";
 
 interface IMatchListProps {
     matches: IMatch[];
@@ -12,10 +13,11 @@ interface IMatchListProps {
 
 // @ts-ignore
 const MatchTable = (props: IMatchListProps)=> {
+    const handleMatchClicked = (match: IMatch) => props.getMatchClickedEventHandler(match);
     return (
         <div>
             <h2>Matches</h2>
-            <table>
+            <Table striped bordered condensed>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -28,11 +30,11 @@ const MatchTable = (props: IMatchListProps)=> {
                     <MatchTableRow
                         match={match}
                         key={match.santa.name}
-                        onMatchClicked={props.getMatchClickedEventHandler(match)}
+                        onMatchClicked={handleMatchClicked}
                         secretMode={props.secretMode}
                     />)}
                 </tbody>
-            </table>
+            </Table>
         </div>
     );
 };
