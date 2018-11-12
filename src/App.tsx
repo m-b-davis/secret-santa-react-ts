@@ -1,5 +1,9 @@
 import * as React from 'react';
 import './App.css';
+import './css/animate.css';
+import './css/responsive.css';
+import './css/style.css';
+
 import { Grid, Row } from 'react-bootstrap';
 
 function shuffle<T>(arr: T[]): T[]{
@@ -123,7 +127,8 @@ class App extends React.Component<{}, IState>{
       try {
         const generatedMatches = this.state.santas.reduce((accumulator, currentSanta) => {
         const { remainingSantaLists, matches } = accumulator;
-
+          
+          // santaSelection will be an array of n santas for this name to be matched to, where n is the number of gifts each santa purchases
           const santaSelection = remainingSantaLists
             // Remove the current name from the list of candidate recipients
             .map(santaList => santaList.filter(santa => santa.name !== currentSanta.name))
@@ -187,9 +192,27 @@ class App extends React.Component<{}, IState>{
 
     return (
       <div className="App">
+      <div id="hero">
+        <div className="redoverlay">
+            <div className="container">
+                <div className="row">
+                    <div className="herotext">
+                        <h2 className="wow zoomInDown" data-wow-duration="3s">Secret Santa</h2>
+
+                        <img className="bigbell wow tada infinite" data-wow-duration="30s" src="img/bell.png" alt="" />
+                    </div>
+
+                    <div className="santa wow bounceInDown" data-wow-duration="2s">
+                        <img src="img/santa.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
       <Grid>
         <form onSubmit={this.handleGenerateMatches}>
-          <h1>Add Santa</h1>
+          <h2>Add Santa</h2>
           <Row>
             <label>Name:</label>
             <input 
@@ -212,7 +235,7 @@ class App extends React.Component<{}, IState>{
             <input 
               type="range"
               min={1}
-              max={this.state.santas.length}
+              max={this.state.santas.length - 1}
               onChange={this.handleNumberOfMatchesChanged}
             />
             <label>{this.state.numberOfMatches}</label>
@@ -267,7 +290,7 @@ interface IMatchListItemProps {
 const MatchTable = (props: IMatchListProps)=> {
   return (
     <div>
-      <h1>Matches</h1>
+      <h2>Matches</h2>
       <table>
         <thead>
           <tr>
