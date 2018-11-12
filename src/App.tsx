@@ -8,8 +8,9 @@ import { Grid, Row } from 'react-bootstrap';
 import MatchTable from "./components/MatchTable";
 import { ISanta, IMatch } from './types';
 import SantaTable from "./components/SantaTable";
-import { shuffle } from './utils';
+import {generateMatches} from './utils';
 import SantaCreator from "./components/SantaCreator";
+import SantaJumbotron from "./components/SantaJumbotron";
 
 const mockSantas = [
   {
@@ -87,57 +88,15 @@ class App extends React.Component<{}, IState>{
 
     while (!matchSuccess) {
       try {
-        const generatedMatches = this.state.santas.reduce((accumulator, currentSanta) => {
-        const { remainingSantaLists, matches } = accumulator;
-          
-          // santaSelection will be an array of n santas for this name to be matched to, where n is the number of gifts each santa purchases
-          const santaSelection = remainingSantaLists
-            // Remove the current name from the list of candidate recipients
-            .map(santaList => santaList.filter(santa => santa.name !== currentSanta.name))
-            // Shuffle each list
-            .map(list => shuffle(list))
-            // Find a candidate recipient from each list and add into selection
-            .reduce((selection, santaList) => {
-              const selectedRecipient = santaList.find(candidateSanta => 
-                // Where santa doesn't exist in selection
-                !selection.map(santa => santa.name).includes(candidateSanta.name)
-              );        
-
-              if (selectedRecipient === undefined) {
-                throw new Error("Matching failed");
-              }
-
-              return [...selection, selectedRecipient];
-            }, []);
-
-          const newMatch: IMatch = {
-            santa: currentSanta,
-            matchedWith: santaSelection
-          };
-
-          return {
-            // Remove each selected santa from their respective remainingSantaList
-            remainingSantaLists: remainingSantaLists.map((santaList, index) =>
-              santaList.filter(santa => {
-                return santa.name !== santaSelection[index]!.name
-              })),
-            matches: [ ...matches, newMatch ]
-          }
-
-        }, initialReducerValue).matches;
-
-        this.setState({
-          matches: generatedMatches
-        });
-
+        const generatedMatches = generateMatches(santas, initialReducerValue);
+        this.setState({ matches: generatedMatches });
         matchSuccess = true;
-
       } catch (error) {
         console.log("Match failed...retrying");
       }
     }
-  }
-  
+  };
+
   private getMatchClickedEventHandler = (match: IMatch) => () => {
     alert(match.santa.name);
   };
@@ -154,24 +113,7 @@ class App extends React.Component<{}, IState>{
 
     return (
       <div className="App">
-      <div id="hero">
-        <div className="redoverlay">
-            <div className="container">
-                <div className="row">
-                    <div className="herotext">
-                        <h2 className="wow zoomInDown" data-wow-duration="3s">Secret Santa</h2>
-
-                        <img className="bigbell wow tada infinite" data-wow-duration="30s" src="img/bell.png" alt="" />
-                    </div>
-
-                    <div className="santa wow bounceInDown" data-wow-duration="2s">
-                        <img src="img/santa.png" alt="" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+        <SantaJumbotron />
       <Grid>
         <form onSubmit={this.handleGenerateMatches}>
           <SantaCreator addSanta={this.handleAddSanta} />

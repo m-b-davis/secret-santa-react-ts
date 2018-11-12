@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {ISanta} from "../../types";
+import {Button} from "react-bootstrap";
 
 interface ISantaCreatorProps {
     addSanta: (santa: ISanta) => void;
@@ -39,7 +40,7 @@ class SantaCreator extends React.Component<ISantaCreatorProps, IState> {
                     value={email}
                     onChange={this.handleEmailChange}
                 />
-                <button onClick={this.handleAddSanta}>Add Santa 🎅🏼</button>
+                <Button style={{margin: "30px 5px"}} bsStyle="success" onClick={this.handleAddSanta}>Add Santa 🎅🏼</Button>
             </div>
         )
     }
