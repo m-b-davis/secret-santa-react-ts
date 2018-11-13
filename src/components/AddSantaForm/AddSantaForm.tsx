@@ -38,7 +38,7 @@ class AddSantaForm extends React.Component<IProps, IState> {
 
         return (
             <div>
-                <h2>Add Santa</h2>
+                <h2 className="header-small">Add Santa</h2>
                 <ControlLabel>Name:</ControlLabel>
                 <FormControl
                     name="name"

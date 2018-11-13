@@ -10,7 +10,7 @@ import { ISanta, IMatch, CancellableEvent } from './types';
 import SantaTable from "./components/SantaTable/SantaTable";
 import { generateMatches } from './utils';
 import AddSantaForm from './components/AddSantaForm/AddSantaForm';
-import Header from "./components/Header/Header";
+import SantaJumbotron from './components/SantaJumbotron/SantaJumbotron';
 
 const mockSantas = [
   {
@@ -115,46 +115,58 @@ class App extends React.Component<{}, IState>{
 
     return (
       <div className="App">
-        <Header />
-        <Grid>
-          <Row>
-            <Col md={8} mdOffset={2}>
-            <AddSantaForm addSanta={this.handleAddSanta} />
+        <SantaJumbotron>
+          <Grid style={{marginTop: "0px"}}>
+            <Row>
+              <Col md={3}>
+                  <img className="bigbell wow tada infinite" data-wow-duration="30s" src="img/bell.png" alt="" />
+              </Col>
+              <Col md={6}>
+                <SantaTable santas={this.state.santas} getDeleteSantaHandler={this.getDeleteSantaHandler} />
+              </Col>
+              <Col md={3}>
+                  <div className="santa wow bounceInDown" data-wow-duration="2s">
+                      <img src="img/santa.png" alt="" />
+                  </div>
+              </Col>
+            </Row>
+            <Row>
+                <AddSantaForm addSanta={this.handleAddSanta} />
+            </Row>
 
-              <form onSubmit={this.handleFormSubmit}>
-              <Col md={6} >
-                <ControlLabel>{`${this.state.numberOfMatches} Gifts Per User`}</ControlLabel>
-                <FormControl
-                  type="range"
-                  min={1}
-                  max={this.state.santas.length - 1}
-                  onChange={this.handleNumberOfMatchesChanged}
-                />
-               </Col>
+              <form onSubmit={this.handleGenerateMatches}>
+                  <Row>
+                    <ControlLabel>{`${this.state.numberOfMatches} Gifts Per User`}</ControlLabel>
+                    <FormControl
+                      type="range"
+                      min={1}
+                      max={this.state.santas.length - 1}
+                      onChange={this.handleNumberOfMatchesChanged}
+                    />
+                  </Row>
 
-              <Col md={6} >
-
-                <Button
-                  bsStyle="success"
-                  onClick={this.handleFormSubmit}
-                  disabled={santasRemaining > 0}
-                >
-                  {`Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
-                </Button>
-                </Col>
+                  <Row>
+                    <Button
+                    bsStyle="success"
+                    onClick={this.handleFormSubmit}
+                    disabled={santasRemaining > 0}
+                  >
+                    {`Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
+                  </Button>
+                  </Row>
               </form>
 
-              <SantaTable santas={this.state.santas} getDeleteSantaHandler={this.getDeleteSantaHandler} />
+          </Grid>
+        </SantaJumbotron>
 
-              {haveGenerated &&
-                <MatchTable getMatchClickedEventHandler={this.getMatchClickedEventHandler}
-                  matches={this.state.matches}
-                  secretMode={this.state.secretMode}
-                />
-              }
-            </Col>
-          </Row>
-        </Grid>
+          { haveGenerated &&
+          <Row>
+              <MatchTable getMatchClickedEventHandler={this.getMatchClickedEventHandler}
+                          matches={this.state.matches}
+                          secretMode={this.state.secretMode}
+              />
+          </Row>}
+
       </div>
     );
   }

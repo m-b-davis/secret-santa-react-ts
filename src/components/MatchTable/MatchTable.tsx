@@ -10,11 +10,12 @@ interface IProps {
     secretMode: boolean;
 }
 
-const MatchTable = (props: IProps) => {
+const MatchTable = (props: IProps)=> {
+    const handleMatchClicked = (match: IMatch) => props.getMatchClickedEventHandler(match);
     return (
         <div>
             <h2 className="header-small">Matches</h2>
-            <Table>
+            <Table striped bordered condensed>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -27,7 +28,7 @@ const MatchTable = (props: IProps) => {
                     <MatchTableRow
                         match={match}
                         key={match.santa.name}
-                        onMatchClicked={props.getMatchClickedEventHandler(match)}
+                        onMatchClicked={handleMatchClicked(match)}
                         secretMode={props.secretMode}
                     />)}
                 </tbody>

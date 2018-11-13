@@ -1,5 +1,5 @@
-import {ISanta} from "../../types";
 import * as React from "react";
+import {ISanta} from "../../types";
 
 import SantaTableRow from './SantaTableRow';
 import { Table, Button } from 'react-bootstrap';
@@ -21,7 +21,7 @@ const SantaTable = (props: IProps) => {
             <h2 className="header-small">Santas</h2>
             { santas.length === 0
                 ? renderEmpty()
-                : <Table>
+                : <Table responsive bordered condensed>
                     <thead>
                     <tr>
                         <th>Name</th>

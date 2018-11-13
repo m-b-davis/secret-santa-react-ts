@@ -1,15 +1,15 @@
 import * as React from "react";
-import { IMatch } from "../../types";
-import { Button } from 'react-bootstrap';
+import {IMatch} from "../../types";
 import NameIndicator from "../NameIndicator/NameIndicator";
+import {Button} from "react-bootstrap";
 
-interface IMatchListItemProps {
+interface IProps {
     match: IMatch;
-    onMatchClicked: React.MouseEventHandler<Button>
+    onMatchClicked: React.MouseEventHandler<Button>;
     secretMode: boolean;
 }
 
-const MatchTableRow = (props: IMatchListItemProps) => {
+const MatchTableRow = (props: IProps) => {
     return (
         <tr>
             <td>{props.match.santa.name}</td>
@@ -24,7 +24,7 @@ const MatchTableRow = (props: IMatchListItemProps) => {
             </td>
             }
             <td>
-                <Button bsStyle="info" onClick={props.onMatchClicked}>Send Email</Button>
+                <Button bsStyle="info" style={{marginTop: 0}} onClick={props.onMatchClicked}>Send Email</Button>
             </td>
         </tr>
     );
