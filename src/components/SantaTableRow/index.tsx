@@ -11,7 +11,10 @@ interface ISantaListItemProps {
 const SantaTableRow = (props: ISantaListItemProps) => {
     return (
         <tr>
-            <td><NameIndicator name={props.santa.name}/>{props.santa.name}</td>
+            <td>
+                <NameIndicator name={props.santa.name}/>
+                {props.santa.name}
+            </td>
             <td>{props.santa.email}</td>
             <td><button onClick={props.onDelete}>x</button></td>
         </tr>
