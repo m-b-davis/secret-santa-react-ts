@@ -1,16 +1,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import registerServiceWorker from './registerServiceWorker';
 import LandingPage from "./pages/LandingPage";
+import registerServiceWorker from './registerServiceWorker';
 
 const Root = () => {
+    const renderLandingPage = () => <LandingPage path="/generator" />;
     return (
         <Router>
             <>
-                <Route path="/" exact render={() => <LandingPage path="/generator" />} />
+                <Route path="/" exact={true} render={renderLandingPage} />
                 <Route path="/generator" component={App} />
             </>
         </Router>

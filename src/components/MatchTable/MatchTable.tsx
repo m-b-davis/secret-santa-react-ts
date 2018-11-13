@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Button, Table  } from 'react-bootstrap';
 
 import { IMatch } from '../../types';
 import MatchTableRow from './MatchTableRow';
@@ -15,7 +15,7 @@ const MatchTable = (props: IProps)=> {
     return (
         <div>
             <h2 className="header-small">Matches</h2>
-            <Table striped bordered condensed>
+            <Table striped={true} bordered={true} condensed={true} >
                 <thead>
                     <tr>
                         <th>Name</th>

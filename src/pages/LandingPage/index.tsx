@@ -1,7 +1,7 @@
 import * as React from 'react';
-import SantaJumbotron from "../../components/SantaJumbotron/SantaJumbotron";
-import {RouteComponentProps, withRouter} from "react-router";
 import {Button, Col, Grid, Row} from "react-bootstrap";
+import {RouteComponentProps, withRouter} from "react-router";
+import SantaJumbotron from "../../components/SantaJumbotron/SantaJumbotron";
 
 interface ILandingPageProps extends RouteComponentProps {
     path: string;

@@ -1,8 +1,7 @@
 import * as React from "react";
+import { Button, Table } from 'react-bootstrap';
 import {ISanta} from "../../types";
-
 import SantaTableRow from './SantaTableRow';
-import { Table, Button } from 'react-bootstrap';
 
 interface IProps {
     santas: ISanta[];
@@ -21,7 +20,7 @@ const SantaTable = (props: IProps) => {
             <h2 className="header-small">Santas</h2>
             { santas.length === 0
                 ? renderEmpty()
-                : <Table responsive bordered condensed>
+                : <Table responsive={true} bordered={true} condensed={true}>
                     <thead>
                     <tr>
                         <th>Name</th>
