@@ -1,7 +1,7 @@
 import * as React from "react";
+import {Button} from "react-bootstrap";
 import {IMatch} from "../../types";
 import NameIndicator from "../NameIndicator/NameIndicator";
-import {Button} from "react-bootstrap";
 
 interface IProps {
     match: IMatch;

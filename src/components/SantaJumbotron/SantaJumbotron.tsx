@@ -1,7 +1,6 @@
 import * as React from 'react';
-// import {Button, Grid, Row, Col} from "react-bootstrap";
-import './index.css';
 import {ReactNode} from "react";
+import './index.css';
 
 interface IProps {
     children: ReactNode;

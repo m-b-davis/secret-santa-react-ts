@@ -1,6 +1,6 @@
 import * as React from 'react';
+import {Button, ControlLabel, FormControl, FormControlProps } from "react-bootstrap";
 import {ISanta} from "../../types";
-import {Button, FormControl, FormControlProps, ControlLabel } from "react-bootstrap";
 
 interface IProps {
     addSanta: (santa: ISanta) => void;

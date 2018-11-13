@@ -1,16 +1,16 @@
 import * as React from 'react';
+import { Button, Col, ControlLabel, FormControl, FormControlProps, Grid, Row } from 'react-bootstrap';
 import './App.css';
 import './css/animate.css';
 import './css/responsive.css';
 import './css/style.css';
 
-import { Grid, Button, Row, FormControl, ControlLabel, FormControlProps, Col } from 'react-bootstrap';
-import MatchTable from "./components/MatchTable/MatchTable";
-import { ISanta, IMatch, CancellableEvent } from './types';
-import SantaTable from "./components/SantaTable/SantaTable";
-import { generateMatches } from './utils';
 import AddSantaForm from './components/AddSantaForm/AddSantaForm';
+import MatchTable from "./components/MatchTable/MatchTable";
 import SantaJumbotron from './components/SantaJumbotron/SantaJumbotron';
+import SantaTable from "./components/SantaTable/SantaTable";
+import { CancellableEvent, IMatch, ISanta } from './types';
+import { generateMatches } from './utils';
 
 const mockSantas = [
   {
