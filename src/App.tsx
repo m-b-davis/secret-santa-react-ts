@@ -10,7 +10,6 @@ import { ISanta, IMatch } from './types';
 import SantaTable from "./components/SantaTable";
 import {generateMatches} from './utils';
 import SantaCreator from "./components/SantaCreator";
-import SantaJumbotron from "./components/SantaJumbotron";
 
 const mockSantas = [
   {
@@ -113,36 +112,35 @@ class App extends React.Component<{}, IState>{
 
     return (
       <div className="App">
-        <SantaJumbotron />
-      <Grid>
-        <form onSubmit={this.handleGenerateMatches}>
-          <SantaCreator addSanta={this.handleAddSanta} />
-          <Row>
-            <label>Number of Matches:</label>
-            <input
-              type="range"
-              min={1}
-              max={this.state.santas.length - 1}
-              onChange={this.handleNumberOfMatchesChanged}
-            />
-            <label>{this.state.numberOfMatches}</label>
-          </Row>
+        <Grid>
+          <form onSubmit={this.handleGenerateMatches}>
+            <SantaCreator addSanta={this.handleAddSanta} />
+            <Row>
+              <label>Number of Matches:</label>
+              <input
+                type="range"
+                min={1}
+                max={this.state.santas.length - 1}
+                onChange={this.handleNumberOfMatchesChanged}
+              />
+              <label>{this.state.numberOfMatches}</label>
+            </Row>
+
+            <Row>
+              <input
+                onClick={this.handleGenerateMatches}
+                disabled={santasRemaining > 0}
+                type="submit"
+                value={ `Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
+              />
+            </Row>
+          </form>
 
           <Row>
-            <input
-              onClick={this.handleGenerateMatches}
-              disabled={santasRemaining > 0}
-              type="submit"
-              value={ `Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
-            />
+            <SantaTable santas={this.state.santas} getDeleteSantaHandler={this.getDeleteSantaHandler} />
           </Row>
-        </form>
 
-        <Row>
-          <SantaTable santas={this.state.santas} getDeleteSantaHandler={this.getDeleteSantaHandler} />
-        </Row>
-
-        { haveGenerated &&
+          { haveGenerated &&
           <Row>
             <MatchTable getMatchClickedEventHandler={this.getMatchClickedEventHandler}
               matches={this.state.matches}   

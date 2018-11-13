@@ -1,0 +1,38 @@
+/* ---------------------
+HERO SECTION
+--------------------- */
+#hero {
+    text-align: center;
+    height: 100vh;
+    color: #fff;
+    background: url(../../img/bg.jpg) fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#hero .container {padding-top: 100px;}
+
+#hero h1 {
+    font-weight: 800;
+    font-family: 'Pacifico', cursive;
+    font-size: 60px;
+    line-height: 1.2em;
+    text-shadow: 7px 9px 5px rgba(161, 19, 15, 0.294);
+}
+
+/*#hero p {text-transform: uppercase;}*/
+
+#hero p {
+    font-family: 'Pacifico', cursive;
+    font-weight: 100;
+    padding-top: 40px;
+    color: #fff;
+    font-size: 25px;
+}
+
+.bigbell {margin-top: -65px;}
+
+.santa {
+    /*float: right;*/
+    /*margin-top: -390px;*/
+}
