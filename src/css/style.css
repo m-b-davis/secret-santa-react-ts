@@ -37,10 +37,8 @@ input:focus {
 }
 
 .btn {
-    border-radius: 30px;
-    padding: 10px 40px;
-    margin-top: 20px;
-    text-transform: uppercase;
+    border-radius: 10px;
+    padding: 5px 10px;
     font-weight: 600;
     -webkit-transition: .5s ease-out;
     -moz-transition: .5s ease-out;
@@ -95,7 +93,7 @@ INPUT FIELDS
 --------------------- */
 input {
     padding: 10px 30px;
-    border-radius: 30px;
+    border-radius: 10px;
     border: 2px solid #b2b2b2;
     margin: 30px 5px;
     color: #b2b2b2;
@@ -126,41 +124,6 @@ SECTION HEADINGS
 }
 
 /* --------------------- 
-HERO SECTION
---------------------- */
-#hero {
-    text-align: center;
-    height: 560px;
-    color: #fff;
-    background: url(../img/bg.jpg) fixed;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
-
-#hero .container {padding-top: 70px;}
-
-#hero h1 {
-    font-weight: 800;
-    text-transform: uppercase;
-    line-height: .8em;
-    text-shadow: 7px 9px 5px rgba(161, 19, 15, 0.294);
-}
-
-#hero p {text-transform: uppercase;}
-
-#hero p {
-    padding-top: 75px;
-    color: #fff;
-}
-
-.bigbell {margin-top: -65px;}
-
-.santa {
-    float: right;
-    margin-top: -390px;
-}
-
-/* --------------------- 
 OVERVIEW SECTION
 --------------------- */
 #overview {
@@ -168,8 +131,8 @@ OVERVIEW SECTION
     padding-top: 100px;
 }
 
-.col-md-6,
-.col-lg-4 {
+#overview .col-md-6,
+#overview .col-lg-4 {
     padding-top: 50px;
 }
 
@@ -192,73 +155,6 @@ CALL-TO-ACTION SECTION
     margin-top: -60px;
     margin-bottom: -15px;
 }
-
-/* --------------------- 
-PRODUCTS SECTION
---------------------- */
-#products {
-    background: url(../img/tag.gif) no-repeat;
-    background-position: right 0;
-    padding-top: 75px;
-}
-
-.featureditem {padding: 75px 0 20px;;}
-.featureditem img{margin-top: -20px;}
-.productimg {max-width: 100%;}
-
-.productimg:hover {
-    opacity: .8;
-    -webkit-transition: .5s ease-out;
-    -moz-transition: .5s ease-out;
-    -o-transition: .5s ease-out;
-    transition: .5s ease-out;
-}
-
-.price {
-    font-size: 16px;
-    color: #000;
-    font-weight: 600;
-    margin-bottom: 0;
-}
-
-.offertag {
-    border-radius: 50%;
-    border: 3px solid #fff;
-    width: 70px;
-    height: 70px;
-    padding: 5px;
-    color: #fff;
-    position: absolute;
-    text-transform: uppercase;
-    font-weight: 600;
-    transform: rotate(351deg);
-    -webkit-transform: rotate(351deg);
-    -moz-transform: rotate(351deg);
-    -o-transform: rotate(351deg);
-    -ms-transform: rotate(351deg);
-}
-
-.offertag h4 {margin-bottom: 0px;}
-.offertag p {color: #fff;}
-
-.bigtag {
-    top: 10px;
-    left: 400px;
-}
-
-.smalltag {
-    top: 100px;
-    left: 110px;
-    -webkit-transform: rotate(351deg) scale(.8);
-    -moz-transform: rotate(351deg) scale(.8);
-    -o-transform: rotate(351deg) scale(.8);
-    -ms-transform: rotate(351deg) scale(.8);
-}
-
-.fixedoffer {background: #89d055;}
-.percentoffer {background: #f53f2c;}
-.otheroffer {background: #668bde;}
-.moreitems .col-md-4 {padding-left: 0;}
 
 /* --------------------- 
 SUBSCRIBE SECTION
