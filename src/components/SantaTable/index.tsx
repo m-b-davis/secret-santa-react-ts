@@ -21,7 +21,7 @@ const SantaTable = (props: ISantaListProps) => {
             <h1>Santas</h1>
             { santas.length === 0
                 ? renderEmpty()
-                : <Table striped bordered condensed>
+                : <Table responsive bordered condensed>
                     <thead>
                     <tr>
                         <th>Name</th>

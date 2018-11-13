@@ -10,7 +10,7 @@ HERO SECTION
     background-repeat: no-repeat;
 }
 
-#hero .container {padding-top: 100px;}
+#hero .container {padding-top: 20px;}
 
 #hero h1 {
     font-weight: 800;
@@ -31,8 +31,3 @@ HERO SECTION
 }
 
 .bigbell {margin-top: -65px;}
-
-.santa {
-    /*float: right;*/
-    /*margin-top: -390px;*/
-}

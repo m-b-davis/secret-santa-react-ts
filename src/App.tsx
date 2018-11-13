@@ -4,12 +4,13 @@ import './css/animate.css';
 import './css/responsive.css';
 import './css/style.css';
 
-import { Grid, Row } from 'react-bootstrap';
+import {Col, Grid, Row} from 'react-bootstrap';
 import MatchTable from "./components/MatchTable";
 import { ISanta, IMatch } from './types';
 import SantaTable from "./components/SantaTable";
 import {generateMatches} from './utils';
 import SantaCreator from "./components/SantaCreator";
+import SantaJumbotron from "./components/SantaJumbotron";
 
 const mockSantas = [
   {
@@ -112,42 +113,57 @@ class App extends React.Component<{}, IState>{
 
     return (
       <div className="App">
-        <Grid>
-          <form onSubmit={this.handleGenerateMatches}>
-            <SantaCreator addSanta={this.handleAddSanta} />
+        <SantaJumbotron>
+          <Grid style={{marginTop: "0px"}}>
             <Row>
-              <label>Number of Matches:</label>
-              <input
-                type="range"
-                min={1}
-                max={this.state.santas.length - 1}
-                onChange={this.handleNumberOfMatchesChanged}
-              />
-              <label>{this.state.numberOfMatches}</label>
+              <Col md={3}>
+                  <img className="bigbell wow tada infinite" data-wow-duration="30s" src="img/bell.png" alt="" />
+              </Col>
+              <Col md={6}>
+                <SantaTable santas={this.state.santas} getDeleteSantaHandler={this.getDeleteSantaHandler} />
+              </Col>
+              <Col md={3}>
+                  <div className="santa wow bounceInDown" data-wow-duration="2s">
+                      <img src="img/santa.png" alt="" />
+                  </div>
+              </Col>
+            </Row>
+            <Row>
+                <SantaCreator addSanta={this.handleAddSanta} />
             </Row>
 
-            <Row>
-              <input
-                onClick={this.handleGenerateMatches}
-                disabled={santasRemaining > 0}
-                type="submit"
-                value={ `Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
-              />
-            </Row>
-          </form>
+              <form onSubmit={this.handleGenerateMatches}>
+                  <Row>
+                      <label>Number of Matches:</label>
+                      <input
+                          type="range"
+                          min={1}
+                          max={this.state.santas.length - 1}
+                          onChange={this.handleNumberOfMatchesChanged}
+                      />
+                      <label>{this.state.numberOfMatches}</label>
+                  </Row>
 
-          <Row>
-            <SantaTable santas={this.state.santas} getDeleteSantaHandler={this.getDeleteSantaHandler} />
-          </Row>
+                  <Row>
+                      <input
+                          onClick={this.handleGenerateMatches}
+                          disabled={santasRemaining > 0}
+                          type="submit"
+                          value={ `Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
+                      />
+                  </Row>
+              </form>
+
+          </Grid>
+        </SantaJumbotron>
 
           { haveGenerated &&
           <Row>
-            <MatchTable getMatchClickedEventHandler={this.getMatchClickedEventHandler}
-              matches={this.state.matches}   
-              secretMode={this.state.secretMode}
-            />
+              <MatchTable getMatchClickedEventHandler={this.getMatchClickedEventHandler}
+                          matches={this.state.matches}
+                          secretMode={this.state.secretMode}
+              />
           </Row>}
-        </Grid>
 
       </div>
     );
