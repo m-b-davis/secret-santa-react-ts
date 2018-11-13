@@ -1,21 +1,20 @@
-// @ts-ignore
 import * as React from 'react';
+import { Table, Button } from 'react-bootstrap';
 
 import { IMatch } from '../../types';
-import MatchTableRow from '../MatchTableRow';
+import MatchTableRow from './MatchTableRow';
 
-interface IMatchListProps {
+interface IProps {
     matches: IMatch[];
-    getMatchClickedEventHandler: (match: IMatch) => React.MouseEventHandler<HTMLButtonElement>
+    getMatchClickedEventHandler: (match: IMatch) => React.MouseEventHandler<Button>
     secretMode: boolean;
 }
 
-// @ts-ignore
-const MatchTable = (props: IMatchListProps)=> {
+const MatchTable = (props: IProps) => {
     return (
         <div>
-            <h2>Matches</h2>
-            <table>
+            <h2 className="header-small">Matches</h2>
+            <Table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -32,7 +31,7 @@ const MatchTable = (props: IMatchListProps)=> {
                         secretMode={props.secretMode}
                     />)}
                 </tbody>
-            </table>
+            </Table>
         </div>
     );
 };

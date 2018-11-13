@@ -24,7 +24,17 @@ export function shuffle<T>(arr: T[]): T[]{
     return arr;
 }
 
-export function generateMatches(santas: ISanta[], initialReducerValue: { remainingSantaLists: ISanta[][], matches: IMatch[]}): IMatch[] {
+export function generateMatches(santas: ISanta[], matchesPerSanta: number) {
+    type reducerState = { 
+        remainingSantaLists: ISanta[][],
+        matches: IMatch[]
+    };
+  
+    const initialReducerValue: reducerState = { 
+        remainingSantaLists: Array(matchesPerSanta).fill(santas),
+        matches: []
+    };
+    
     return santas.reduce((accumulator, currentSanta) => {
         const { remainingSantaLists, matches } = accumulator;
 
@@ -33,7 +43,7 @@ export function generateMatches(santas: ISanta[], initialReducerValue: { remaini
         // Remove the current name from the list of candidate recipients
             .map(santaList => santaList.filter(santa => santa.name !== currentSanta.name))
             // Shuffle each list
-            .map(list => shuffle(list))
+            .map(shuffle)
             // Find a candidate recipient from each list and add into selection
             .reduce((selection, santaList) => {
                 const selectedRecipient = santaList.find(candidateSanta =>

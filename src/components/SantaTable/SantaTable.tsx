@@ -1,14 +1,15 @@
 import {ISanta} from "../../types";
 import * as React from "react";
 
-import SantaTableRow from '../SantaTableRow';
+import SantaTableRow from './SantaTableRow';
+import { Table, Button } from 'react-bootstrap';
 
-interface ISantaListProps {
+interface IProps {
     santas: ISanta[];
-    getDeleteSantaHandler: (santa: ISanta) => React.MouseEventHandler<HTMLButtonElement>;
+    getDeleteSantaHandler: (santa: ISanta) => React.MouseEventHandler<Button>;
 }
 
-const SantaTable = (props: ISantaListProps) => {
+const SantaTable = (props: IProps) => {
     const { santas } = props;
 
     const renderEmpty = () => (
@@ -17,10 +18,10 @@ const SantaTable = (props: ISantaListProps) => {
 
     return (
         <div>
-            <h1>Santas</h1>
+            <h2 className="header-small">Santas</h2>
             { santas.length === 0
                 ? renderEmpty()
-                : <table>
+                : <Table>
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -36,7 +37,7 @@ const SantaTable = (props: ISantaListProps) => {
                             onDelete={props.getDeleteSantaHandler(santa)}
                         />)}
                     </tbody>
-                </table>
+                </Table>
             }
         </div>
     );
