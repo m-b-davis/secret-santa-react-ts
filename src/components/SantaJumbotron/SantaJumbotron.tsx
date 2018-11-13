@@ -3,11 +3,11 @@ import * as React from 'react';
 import './index.css';
 import {ReactNode} from "react";
 
-interface ISantaJumbotronProps {
+interface IProps {
     children: ReactNode;
 }
 
-const SantaJumbotron = (props: ISantaJumbotronProps) => {
+const SantaJumbotron = (props: IProps) => {
     return (
         <div id="hero">
             <div className="redoverlay">

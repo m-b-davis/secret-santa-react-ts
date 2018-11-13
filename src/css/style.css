@@ -37,10 +37,8 @@ input:focus {
 }
 
 .btn {
-    border-radius: 30px;
-    padding: 10px 40px;
-    margin-top: 20px;
-    text-transform: uppercase;
+    border-radius: 10px;
+    padding: 5px 10px;
     font-weight: 600;
     -webkit-transition: .5s ease-out;
     -moz-transition: .5s ease-out;
@@ -95,7 +93,7 @@ INPUT FIELDS
 --------------------- */
 input {
     padding: 10px 30px;
-    border-radius: 30px;
+    border-radius: 10px;
     border: 2px solid #b2b2b2;
     margin: 30px 5px;
     color: #b2b2b2;

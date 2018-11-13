@@ -8,3 +8,5 @@ export interface ISanta {
     email: string;
 }
 
+export type CancellableEvent = { preventDefault: () => void }
+
