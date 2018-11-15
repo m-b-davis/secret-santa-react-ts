@@ -24,6 +24,30 @@ export function shuffle<T>(arr: T[]): T[]{
     return arr;
 }
 
+function getUrl(match: IMatch) {
+    const payload = `${match.santa.name}|${match.matchedWith.map(m => m.name).join(',')}`;
+    console.log(payload);
+ 
+    const encoded = window.btoa(payload);
+
+    return `https://${window.location.hostname}/show-match/${encoded}`;
+}
+
+export function decodePayload(payload: string): IMatch {
+    const decoded = window.atob(payload);
+    const [ santaName, recipientString ] = decoded.split('|');
+
+    const recipients: ISanta[] = recipientString.split(',').map(recipientName => ({
+        name: recipientName,
+        email: ''
+    }));
+
+    return {
+        santa: { name: santaName, email: '' },
+        matchedWith: recipients
+    };
+}
+
 export function generateMatches(santas: ISanta[], matchesPerSanta: number) {
     type reducerState = { 
         remainingSantaLists: ISanta[][],
@@ -69,7 +93,10 @@ export function generateMatches(santas: ISanta[], matchesPerSanta: number) {
                 santaList.filter(santa => {
                     return santa.name !== santaSelection[index]!.name
                 })),
-            matches: [ ...matches, newMatch ]
+            matches: [ ...matches, { 
+                ...newMatch,
+                url: getUrl(newMatch) 
+            }]
         }
     }, initialReducerValue).matches;
 }

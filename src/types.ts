@@ -1,6 +1,7 @@
 export interface IMatch {
     santa: ISanta;
     matchedWith: ISanta[];
+    url?: string;
 }
 
 export interface ISanta {

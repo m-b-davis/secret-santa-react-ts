@@ -1,15 +1,18 @@
 import * as React from "react";
 import { Button, Table } from 'react-bootstrap';
-import {ISanta} from "../../types";
+import {ISanta, IMatch} from "../../types";
 import SantaTableRow from './SantaTableRow';
 
 interface IProps {
     santas: ISanta[];
+    matches?: IMatch[];
+    getMatchClickedEventHandler: (match: IMatch) => React.MouseEventHandler<Button>;
     getDeleteSantaHandler: (santa: ISanta) => React.MouseEventHandler<Button>;
 }
 
 const SantaTable = (props: IProps) => {
-    const { santas } = props;
+    const { santas, matches } = props;
+    const handleMatchClicked = (match: IMatch) => props.getMatchClickedEventHandler(match);
 
     const renderEmpty = () => (
         <p>You haven't added any santas yet!</p>
@@ -25,14 +28,17 @@ const SantaTable = (props: IProps) => {
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Actions</th>
+                        { matches && matches.length > 0 && <th>Match</th>}
+                        <th>Remove</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {santas.map(santa =>
+                    {santas.map((santa, index) =>
                         <SantaTableRow
                             santa={santa}
+                            match={matches && matches[index]}
                             key={santa.name}
+                            onMatchClicked={matches && handleMatchClicked(matches[index])}
                             onDelete={props.getDeleteSantaHandler(santa)}
                         />)}
                     </tbody>
