@@ -20,3 +20,4 @@ A secret santa application using React and Typescript.
 # Todo
  - Improve UI
  - Create links to send to santas to reveal allocation
+ - Create reveal page
