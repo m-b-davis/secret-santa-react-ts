@@ -27,6 +27,73 @@
   to { transform: rotate(360deg); }
 }
 
+.header-section {
+  padding-top: 20px;
+}
+
 .header-small {
   display: block;
+}
+
+.add-santa__input {
+  margin:0 auto 15px 0;
+}
+
+.add-santa__header {
+  margin-bottom: 30px;
+}
+
+.add-santa__btn {
+  margin-top:10px;
+}
+
+.add-santa__container {
+  margin: 20px auto 30px;
+}
+
+.add-santa__input-label {
+  margin-right: 100%;
+  margin-bottom: 10px;
+}
+
+.main-title {
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.ss-config__container { 
+  margin-top:15px;
+}
+
+.ss-config {
+  margin-top: 50px;
+}
+
+.ss-config__range-container > * {
+  display: inline-block;
+}
+
+.ss-config__range-container > input {
+  width: 80%;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.ss-config__btn {
+  margin-top: 15px;
+}
+
+.header-img {
+  width: 150px;
+  height: 150px;
+}
+
+.santa-table__url-input {
+  margin: 0;
+  padding: 5px 10px;
+  width: 40%;
+}
+
+.santa-table__match-btn {
+  margin: 0 0 0 10px;
 }

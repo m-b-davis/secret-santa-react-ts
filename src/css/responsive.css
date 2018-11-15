@@ -104,10 +104,6 @@
     #hero p {
         padding-top: 60px;
     }
-    .bigbell {
-        height: 160px;
-        margin-top: -25px;
-    }
     .bigtag {
         left: 450px;
     }
@@ -172,7 +168,6 @@
         display: none;
     }
     .bigbell {
-        margin-top: -50px;
     }
     .bigtag {
         left: 270px;
@@ -200,7 +195,6 @@
         padding-top: 50px;
     }
     .bigbell {
-        margin-top: -30px;
     }
     .bigtag {
         left: 230px;
