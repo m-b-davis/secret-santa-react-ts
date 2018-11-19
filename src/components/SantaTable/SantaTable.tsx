@@ -7,6 +7,7 @@ interface IProps {
     santas: ISanta[];
     matches?: IMatch[];
     getDeleteSantaHandler: (santa: ISanta) => React.MouseEventHandler<Button>;
+    getMatchClickedEventHandler: any;
 }
 
 const SantaTable = (props: IProps) => {
