@@ -6,13 +6,11 @@ import SantaTableRow from './SantaTableRow';
 interface IProps {
     santas: ISanta[];
     matches?: IMatch[];
-    getMatchClickedEventHandler: (match: IMatch) => React.MouseEventHandler<Button>;
     getDeleteSantaHandler: (santa: ISanta) => React.MouseEventHandler<Button>;
 }
 
 const SantaTable = (props: IProps) => {
     const { santas, matches } = props;
-    const handleMatchClicked = (match: IMatch) => props.getMatchClickedEventHandler(match);
 
     const renderEmpty = () => (
         <p>You haven't added any santas yet!</p>
@@ -38,7 +36,6 @@ const SantaTable = (props: IProps) => {
                             santa={santa}
                             match={matches && matches[index]}
                             key={santa.name}
-                            onMatchClicked={matches && handleMatchClicked(matches[index])}
                             onDelete={props.getDeleteSantaHandler(santa)}
                         />)}
                     </tbody>

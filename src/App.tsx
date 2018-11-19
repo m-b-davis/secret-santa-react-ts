@@ -10,33 +10,6 @@ import SantaTable from "./components/SantaTable/SantaTable";
 import { CancellableEvent, IMatch, ISanta } from './types';
 import { generateMatches } from './utils';
 
-const mockSantas = [
-  {
-    name: 'Matt',
-    email: 'matt@santa.com'
-  },
-  {
-    name: 'Steve',
-    email: 'steve@santa.com'
-  },
-  {
-    name: 'Ryan',
-    email: 'ryan@santa.com'
-  },
-  {
-    name: 'Tyler',
-    email: 'tyler@santa.com'
-  },
-  {
-    name: 'Dawne',
-    email: 'dawne@santa.com'
-  },
-  {
-    name: 'Katie',
-    email: 'katie@santa.com'
-  }
-];
-
 
 interface IState {
   santas: ISanta[];
@@ -51,8 +24,8 @@ class App extends React.Component<{}, IState>{
 
     // Initialise app state
     this.state = {
-      santas: mockSantas,
-      numberOfMatches: 2,
+      santas: [],
+      numberOfMatches: 1,
       matches: [],
       secretMode: false
     }
@@ -80,8 +53,9 @@ class App extends React.Component<{}, IState>{
   private handleGenerateMatches = () => {
     // This algorithm to generate matches can fail. If it does, we retry until it's successfuly
     let matchSuccess = false;
+    let attempts = 10;
 
-    while (!matchSuccess) {
+    while (!matchSuccess && attempts > 0) {
       try {
         this.setState({
           matches: generateMatches(
@@ -92,9 +66,15 @@ class App extends React.Component<{}, IState>{
 
         matchSuccess = true;
       } catch (error) {
+        attempts -= 1;
         console.log("Match failed...retrying");
+
+        if (attempts === 0) {
+          alert("Sorry - matching failed!");
+        }
       }
     }
+
   };
 
   private getMatchClickedEventHandler = (match: IMatch) => () => {
@@ -114,25 +94,27 @@ class App extends React.Component<{}, IState>{
   };
 
   private renderGenerateMatches = () => {
-    const santasRemaining = this.state.numberOfMatches - this.state.santas.length;
+    const santasRemaining = Math.max(this.state.numberOfMatches - this.state.santas.length, 3 - this.state.santas.length);
 
 return (
     <form className="ss-config" onSubmit={this.handleGenerateMatches}>
     <h2>Generate</h2>
-    <div>
-      <div className="ss-config__range-container">
-        <label>1</label>
-        <FormControl
-          type="range"
-          min={1}
-          max={this.state.santas.length - 2}
-          onChange={this.handleNumberOfMatchesChanged}
-        />
-        <label>{this.state.santas.length - 2}</label>
-      </div>
+      
+    {santasRemaining < 0 && 
+      <div>
+        <div className="ss-config__range-container">
+          <label>1</label>
+          <FormControl
+            type="range"
+            min={1}
+            max={this.state.santas.length - 2}
+            onChange={this.handleNumberOfMatchesChanged}
+          />
+          <label>{this.state.santas.length - 2}</label>
+        </div>
       <ControlLabel>{`${this.state.numberOfMatches} Gift${this.state.numberOfMatches > 1 ? 's' : ''} Per User`}</ControlLabel>
     </div>
-
+    }
     <Button
       bsStyle="success"
       className="ss-config__btn"

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
+
 import App from './App';
 import './index.css';
 import './App.css';
@@ -11,8 +12,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 const Root = () => {
     const renderLandingPage = () => <LandingPage path="/generator" />;
+    console.log(process.env.PUBLIC_URL);
+    
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <>
                 <Route path="/" exact={true} render={renderLandingPage} />
                 <Route path="/show-match/:payload" component={ShowMatchPage} />

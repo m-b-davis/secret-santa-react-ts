@@ -30,8 +30,44 @@ function getUrl(match: IMatch) {
  
     const encoded = window.btoa(payload);
 
-    return `https://${window.location.hostname}/show-match/${encoded}`;
+    return `https://${window.location.hostname}/#/show-match/${encoded}`;
 }
+
+export function getMailTo(match: IMatch) {
+    const emailSubject = "Your Secret Santa Allocation";
+    const body = `Hi ${match.santa.name}!, %0D%0A %0D%0A Below is a link to view your Secret Santa allocation. %0D%0A %0D%0A ${match.url} %0D%0A %0D%0A Thanks!`;
+
+    const mailto = `mailto:${match.santa.email}?subject=${emailSubject}&body=${body}`;
+    return mailto;
+}
+
+export function openMailTo(mailto:string) {
+    const x = window.open(mailto);
+    x && x.close();
+    console.log(mailto);
+}
+
+export function copyToClipboard(text: string) {
+
+    // Create an auxiliary hidden input
+    var aux = document.createElement("input");
+  
+    // Get the text from the element passed into the input
+    aux.setAttribute("value", text);
+  
+    // Append the aux input to the body
+    document.body.appendChild(aux);
+  
+    // Highlight the content
+    aux.select();
+  
+    // Execute the copy command
+    document.execCommand("copy");
+  
+    // Remove the input from the body
+    document.body.removeChild(aux);
+  
+  }
 
 export function decodePayload(payload: string): IMatch {
     const decoded = window.atob(payload);
