@@ -1,5 +1,53 @@
 .App {
   text-align: center;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
+}
+/* 1400 breakpoint */
+
+.App__bells {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.App__title {
+  font-size: 1.5em;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.App__santa {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.App__creator {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.App__santa-table {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.App__santa-generator {
+  grid-column-start: 2;
+  grid-column-end: 6;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
 
 .App-logo {
@@ -12,10 +60,6 @@
   height: 150px;
   padding: 20px;
   color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
 }
 
 .App-intro {
