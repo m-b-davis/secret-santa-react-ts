@@ -1,54 +1,83 @@
 .App {
   text-align: center;
   height: 100%;
+  margin: 10px 20px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr 1fr 1fr;
-}
-/* 1400 breakpoint */
-
-.App__bells {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-template-rows: 180px 250px 1fr 250px;
+  grid-column-gap: 40px;
+  grid-row-gap: 20px;
+  grid-template-areas:
+    "title"
+    "creator"
+    "table"
+    "generate"
+  ;
 }
 
 .App__title {
   font-size: 1.5em;
-  grid-column-start: 3;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-area: title;
 }
-
-.App__santa {
-  grid-column-start: 5;
-  grid-column-end: 6;
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
-
 .App__creator {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-area: creator;
 }
 
 .App__santa-table {
-  grid-column-start: 4;
-  grid-column-end: 6;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-area: table;
 }
 
 .App__santa-generator {
-  grid-column-start: 2;
-  grid-column-end: 6;
-  grid-row-start: 3;
-  grid-row-end: 4;
+  grid-area: generate;
 }
+
+.App__bells, .App__santa {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .App {
+    text-align: center;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 180px 2fr 250px;
+    grid-column-gap: 40px;
+    grid-template-areas:
+            "bells title title santa"
+            "creator creator table table"
+            "generate generate generate generate";
+  }
+
+  .App__bells {
+    grid-area: bells;
+    display: block;
+  }
+
+  .App__santa {
+    grid-area: santa;
+    display: block;
+  }
+
+}
+
+@media only screen and (min-width: 1400px ){
+  .App {
+    text-align: center;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 180px 2fr 250px;
+    grid-column-gap: 40px;
+    grid-template-areas:
+            "a bells title title santa b"
+            "a creator creator table table b"
+            "a generate generate generate generate b"
+  ;
+  }
+}
+/* 1400 breakpoint */
+
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
