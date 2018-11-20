@@ -1,6 +1,85 @@
 .App {
   text-align: center;
+  height: 100%;
+  padding: 10px 20px;
+  display: grid;
+  grid-template-rows: 180px 1fr 0.5fr 250px;
+  grid-column-gap: 40px;
+  grid-row-gap: 20px;
+  grid-template-areas:
+    "title"
+    "creator"
+    "table"
+    "generate"
+  ;
 }
+
+.App__title {
+  font-size: 1.5em;
+  grid-area: title;
+}
+.App__creator {
+  grid-area: creator;
+}
+
+.App__santa-table {
+  grid-area: table;
+}
+
+.App__santa-generator {
+  grid-area: generate;
+}
+
+.App__bells, .App__santa {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .App {
+    text-align: center;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 180px 2fr 250px;
+    grid-column-gap: 40px;
+    grid-template-areas:
+            "bells title title santa"
+            "creator creator table table"
+            "generate generate generate generate";
+  }
+
+  .App__bells {
+    grid-area: bells;
+    display: block;
+    justify-self: center;
+  }
+
+  .App__santa {
+    grid-area: santa;
+    display: block;
+    margin-right: 0 !important;
+  }
+
+}
+
+@media only screen and (min-width: 1400px ){
+  .App {
+    text-align: center;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 180px 2fr 250px;
+    grid-column-gap: 40px;
+    grid-template-areas:
+            "a bells title title santa b"
+            "a creator creator table table b"
+            "a generate generate generate generate b"
+  ;
+  }
+}
+/* 1400 breakpoint */
+
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -12,10 +91,6 @@
   height: 150px;
   padding: 20px;
   color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
 }
 
 .App-intro {
@@ -40,33 +115,32 @@
 }
 
 .add-santa__header {
-  margin-bottom: 30px;
 }
 
 .add-santa__btn {
-  margin-top:10px;
+  margin-top: 10px;
+  width: 150px;
+  justify-self: center;
 }
 
 .add-santa__container {
-  margin: 20px auto 30px;
+  margin: auto;
+  display: grid;
 }
 
 .add-santa__input-label {
-  margin-right: 100%;
+  text-align: left;
   margin-bottom: 10px;
 }
 
-.main-title {
-  margin: 0 auto;
-  padding-top: 20px;
-}
-
-.ss-config__container { 
+.ss-config__container {
   margin-top:15px;
 }
 
-.ss-config {
-  margin-top: 50px;
+.santa-table__email-cell {
+  /*white-space: normal;*/
+  /*overflow: hidden;*/
+  /*width: 40%;*/
 }
 
 .ss-config__range-container > * {

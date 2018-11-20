@@ -7,6 +7,7 @@ interface IProps {
     santas: ISanta[];
     matches?: IMatch[];
     getDeleteSantaHandler: (santa: ISanta) => React.MouseEventHandler<Button>;
+    getMatchClickedEventHandler: any;
 }
 
 const SantaTable = (props: IProps) => {
@@ -17,7 +18,7 @@ const SantaTable = (props: IProps) => {
     );
 
     return (
-        <div>
+        <>
             <h2 className="header-small">Santas</h2>
             { santas.length === 0
                 ? renderEmpty()
@@ -41,7 +42,7 @@ const SantaTable = (props: IProps) => {
                     </tbody>
                 </Table>
             }
-        </div>
+        </>
     );
 };
 

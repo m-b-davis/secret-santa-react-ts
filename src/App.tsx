@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Col, ControlLabel, FormControl, FormControlProps, Grid, Row } from 'react-bootstrap';
+import { Button, ControlLabel, FormControl, FormControlProps } from 'react-bootstrap';
 import './css/animate.css';
 import './css/responsive.css';
 import './css/style.css';
@@ -89,82 +89,69 @@ class App extends React.Component<{}, IState>{
 
   private getDeleteSantaHandler = (deleteSanta: ISanta) => () => {
     this.setState({
-      santas: this.state.santas.filter(santa => santa.name !== deleteSanta.name)
+      santas: this.state.santas.filter(santa => santa.email !== deleteSanta.email)
     })
   };
 
   private renderGenerateMatches = () => {
     const santasRemaining = Math.max(this.state.numberOfMatches - this.state.santas.length, 3 - this.state.santas.length);
 
-return (
-    <form className="ss-config" onSubmit={this.handleGenerateMatches}>
-    <h2>Generate</h2>
-      
-    {santasRemaining < 0 && 
-      <div>
-        <div className="ss-config__range-container">
-          <label>1</label>
-          <FormControl
-            type="range"
-            min={1}
-            max={this.state.santas.length - 2}
-            onChange={this.handleNumberOfMatchesChanged}
-          />
-          <label>{this.state.santas.length - 2}</label>
+    return (
+        <form className="ss-config" onSubmit={this.handleGenerateMatches}>
+        <h2>Generate</h2>
+
+        {santasRemaining < 0 &&
+          <div>
+            <div className="ss-config__range-container">
+              <label>1</label>
+              <FormControl
+                type="range"
+                min={1}
+                max={this.state.santas.length - 2}
+                onChange={this.handleNumberOfMatchesChanged}
+              />
+              <label>{this.state.santas.length - 2}</label>
+            </div>
+          <ControlLabel>{`${this.state.numberOfMatches} Gift${this.state.numberOfMatches > 1 ? 's' : ''} Per User`}</ControlLabel>
         </div>
-      <ControlLabel>{`${this.state.numberOfMatches} Gift${this.state.numberOfMatches > 1 ? 's' : ''} Per User`}</ControlLabel>
-    </div>
-    }
-    <Button
-      bsStyle="success"
-      className="ss-config__btn"
-      onClick={this.handleFormSubmit}
-      disabled={santasRemaining > 0}
-    >
-      {`Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
-    </Button>
-  </form>
-);
-  }
+        }
+        <Button
+          bsStyle="success"
+          className="ss-config__btn"
+          onClick={this.handleFormSubmit}
+          disabled={santasRemaining > 0}
+        >
+          {`Generate Pairings ${santasRemaining > 0 ? `(Add ${santasRemaining})` : ''}`}
+        </Button>
+      </form>
+    );
+  };
 
   public render() {
     return (
-      <div className="App">
-        <SantaJumbotron>
-            <Row className="header-section">
-              <Col md={1} mdOffset={2}>
-                <img className="bigbell header-img wow tada infinite" data-wow-duration="30s" src="img/bell.png" alt="" />
-              </Col>
-              <Col md={6}>
-                <h1 className="main-title">Secret Santa Generator</h1>
-              </Col>
-              <Col md={1} mdOffset={0}>
-                <div className="santa wowbounceInDown" data-wow-duration="2s">
-                  <img className="header-img" src="img/santa.png" alt="" />
-                </div>
-              </Col>
-            </Row>
-
-          <Grid style={{ marginTop: "0px" }}>
-            <Row>
-              <Col md={3} >
-                <AddSantaForm addSanta={this.handleAddSanta} />
-                {this.renderGenerateMatches()}
-              </Col>  
-              <Col md={8} mdOffset={1}>
-                <SantaTable 
-                  santas={this.state.santas}
-                  matches={this.state.matches}
-                  getMatchClickedEventHandler={this.getMatchClickedEventHandler}
-                  getDeleteSantaHandler={this.getDeleteSantaHandler} 
-                  />
-              </Col>
-            </Row>
-
-          </Grid>
-        </SantaJumbotron>
-
-      </div>
+     <SantaJumbotron>
+        <div className="App">
+            <img className="App__bells bigbell header-img wow tada infinite" data-wow-duration="30s" src="img/bell.png" alt="" />
+            <h1 className="main-title App__title">Secret Santa Generator</h1>
+            <div className="App__santa santa wowbounceInDown" data-wow-duration="2s">
+              <img className="header-img" src="img/santa.png" alt="" />
+            </div>
+            <div className="App__creator">
+              <AddSantaForm addSanta={this.handleAddSanta} />
+            </div>
+            <div className="App__santa-table">
+              <SantaTable
+                santas={this.state.santas}
+                matches={this.state.matches}
+                getMatchClickedEventHandler={this.getMatchClickedEventHandler}
+                getDeleteSantaHandler={this.getDeleteSantaHandler}
+                />
+            </div>
+            <div className="App__santa-generator">
+              {this.renderGenerateMatches()}
+            </div>
+        </div>
+      </SantaJumbotron>
     );
   }
 }
