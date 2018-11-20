@@ -89,7 +89,7 @@ class App extends React.Component<{}, IState>{
 
   private getDeleteSantaHandler = (deleteSanta: ISanta) => () => {
     this.setState({
-      santas: this.state.santas.filter(santa => santa.name !== deleteSanta.name)
+      santas: this.state.santas.filter(santa => santa.email !== deleteSanta.email)
     })
   };
 

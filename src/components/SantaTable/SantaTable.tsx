@@ -18,7 +18,7 @@ const SantaTable = (props: IProps) => {
     );
 
     return (
-        <div>
+        <>
             <h2 className="header-small">Santas</h2>
             { santas.length === 0
                 ? renderEmpty()
@@ -42,7 +42,7 @@ const SantaTable = (props: IProps) => {
                     </tbody>
                 </Table>
             }
-        </div>
+        </>
     );
 };
 
