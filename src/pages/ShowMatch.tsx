@@ -27,7 +27,7 @@ const ShowMatchPage = (props: ILandingPageProps) => {
     return (
         <div>
             <SantaJumbotron>
-                <Grid>
+                <Grid style={{minHeight:'1000px'}}>
                     <Row className="header-section">
                         <Col md={1} mdOffset={1}>
                             <img className="bigbell header-img wow tada infinite" data-wow-duration="30s" src="../img/bell.png" alt="" />

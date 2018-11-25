@@ -77,16 +77,6 @@ class App extends React.Component<{}, IState>{
 
   };
 
-  private getMatchClickedEventHandler = (match: IMatch) => () => {
-    //const emailSubject = "Your Secret Santa Allocation";
-   // const body = `Hi ${match.santa.name}!, Below is a link to view your Secret Santa allocation. ${match.url} Thanks!`;
-
-    const mailto = `mailto:${match.santa.email}`;//?subject=${emailSubject}&body=${body}`;
-    const x = window.open(mailto);
-    x && x.close();
-    console.log(mailto);
-  };
-
   private getDeleteSantaHandler = (deleteSanta: ISanta) => () => {
     this.setState({
       santas: this.state.santas.filter(santa => santa.email !== deleteSanta.email)
@@ -143,7 +133,6 @@ class App extends React.Component<{}, IState>{
               <SantaTable
                 santas={this.state.santas}
                 matches={this.state.matches}
-                getMatchClickedEventHandler={this.getMatchClickedEventHandler}
                 getDeleteSantaHandler={this.getDeleteSantaHandler}
                 />
             </div>
